@@ -36,8 +36,13 @@ public class MainActivity extends AppCompatActivity {
             // counter.animate().translationY(1000f).setDuration(100);
             for (int[] winningPosition : winningState) {
                 // System.out.println(gameState[winningPosition[0]]);
+                    if(gameState[winningPosition[0]]==gameState[winningPosition[1]]&&
+                        gameState[winningPosition[1]]==gameState[winningPosition[2]] &&
+                      gameState[winningPosition[0]] !=2 ){
 
-             Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]])+","+String.valueOf(gameState[winningPosition[1]])+","+String.valueOf(gameState[winningPosition[2]]), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]]), Toast.LENGTH_LONG).show();
+                    }
+//             Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]])+","+String.valueOf(gameState[winningPosition[1]])+","+String.valueOf(gameState[winningPosition[2]]), Toast.LENGTH_LONG).show();
                 //Toast.makeText(getApplicationContext(), String.valueOf(winningPosition[0]), Toast.LENGTH_LONG).show();
             }
         }
