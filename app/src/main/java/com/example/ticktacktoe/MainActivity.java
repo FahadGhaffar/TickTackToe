@@ -3,9 +3,13 @@ package com.example.ticktacktoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     int playcounter = 0;
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
     int[][] winningState = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
-
     public void dropIn(View view) {
 
         ImageView counter = (ImageView) view;
@@ -40,12 +43,39 @@ public class MainActivity extends AppCompatActivity {
                         gameState[winningPosition[1]]==gameState[winningPosition[2]] &&
                       gameState[winningPosition[0]] !=2 ){
 
-                        Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]]), Toast.LENGTH_LONG).show();
+                        TextView text=(TextView) findViewById(R.id.PlayAgaintextView);
+                        text.setText(String.valueOf(gameState[winningPosition[0]]));
+                       // Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]]), Toast.LENGTH_LONG).show();
+                        LinearLayout layout=(LinearLayout) findViewById(R.id.playAgainLayout);
+
+                        layout.setVisibility(View.VISIBLE);
+
                     }
 //             Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]])+","+String.valueOf(gameState[winningPosition[1]])+","+String.valueOf(gameState[winningPosition[2]]), Toast.LENGTH_LONG).show();
                 //Toast.makeText(getApplicationContext(), String.valueOf(winningPosition[0]), Toast.LENGTH_LONG).show();
             }
         }
+    }
+    public void PlayAgain(View view){
+
+        playcounter = 0;
+        // gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
+         for (int i=0; i<=gameState.length ;i++){
+
+             gameState[i]=2;
+         }
+        LinearLayout layouts=(LinearLayout) findViewById(R.id.playAgainLayout);
+
+        layouts.setVisibility(View.INVISIBLE);
+
+        GridLayout gridLayouts=(GridLayout) findViewById(R.id.GridLayoutId);
+
+        for (int i=0 ;i<=gridLayouts.getChildCount();i++){
+
+
+            ((ImageView) gridLayouts.getChildAt(i)).setImageResource(0);
+        }
+
     }
 
     @Override
