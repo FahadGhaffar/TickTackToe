@@ -57,24 +57,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void PlayAgain(View view){
-
-        playcounter = 0;
+   Toast.makeText(getApplicationContext(),"good",Toast.LENGTH_LONG).show();
+       playcounter = 0;
         // gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
-         for (int i=0; i<=gameState.length ;i++){
+         for (int i=0; i<gameState.length ;i++){
 
-             gameState[i]=2;
-         }
+            gameState[i]=2;
+        }
         LinearLayout layouts=(LinearLayout) findViewById(R.id.playAgainLayout);
 
-        layouts.setVisibility(View.INVISIBLE);
+       layouts.setVisibility(View.INVISIBLE);
+        androidx.gridlayout.widget.GridLayout grid = (androidx.gridlayout.widget.GridLayout)findViewById(R.id.GridLayoutId);
+  //    GridLayout gridLayouts=(GridLayout) findViewById(R.id.GridLayoutId);
+      Log.i("gridlayoutcheck", String.valueOf(grid.getChildCount()));
+      for (int i=0 ;i<grid.getChildCount();i++){
 
-        GridLayout gridLayouts=(GridLayout) findViewById(R.id.GridLayoutId);
 
-        for (int i=0 ;i<=gridLayouts.getChildCount();i++){
-
-
-            ((ImageView) gridLayouts.getChildAt(i)).setImageResource(0);
-        }
+        ((ImageView) grid.getChildAt(i)).setImageResource(0);
+      }
 
     }
 
