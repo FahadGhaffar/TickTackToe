@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean activeplayer=true;
     // 0 = 0 player ,1=x player
     int playcounter = 0;
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
         //counter.setTranslationY(-1000f);
         System.out.println(counter.getTag().toString());
-
+        //Toast.makeText(getApplicationContext(),String.valueOf(counter.getTag().toString()),Toast.LENGTH_LONG).show();
         int teppedCounter = Integer.parseInt(counter.getTag().toString());
 
-        if (gameState[teppedCounter] == 2) {
+        if (gameState[teppedCounter] == 2 && activeplayer)  {
             gameState[teppedCounter] = playcounter;
             if (playcounter == 0) {
                 counter.setImageResource(R.drawable.o);
@@ -42,13 +42,30 @@ public class MainActivity extends AppCompatActivity {
                     if(gameState[winningPosition[0]]==gameState[winningPosition[1]]&&
                         gameState[winningPosition[1]]==gameState[winningPosition[2]] &&
                       gameState[winningPosition[0]] !=2 ){
-
+                        activeplayer=false;
                         TextView text=(TextView) findViewById(R.id.PlayAgaintextView);
                         text.setText(String.valueOf(gameState[winningPosition[0]]));
                        // Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]]), Toast.LENGTH_LONG).show();
                         LinearLayout layout=(LinearLayout) findViewById(R.id.playAgainLayout);
 
                         layout.setVisibility(View.VISIBLE);
+
+                    } else{
+                        boolean gameover=true;
+                        for (int counterover : gameState){
+                            if (counterover==2) gameover=false;
+                        }
+                        if(gameover){
+
+                            TextView text=(TextView) findViewById(R.id.PlayAgaintextView);
+                            text.setText("Draw");
+                            // Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]]), Toast.LENGTH_LONG).show();
+                            LinearLayout layout=(LinearLayout) findViewById(R.id.playAgainLayout);
+
+                            layout.setVisibility(View.VISIBLE);
+
+                        }
+
 
                     }
 //             Toast.makeText(getApplicationContext(), String.valueOf(gameState[winningPosition[0]])+","+String.valueOf(gameState[winningPosition[1]])+","+String.valueOf(gameState[winningPosition[2]]), Toast.LENGTH_LONG).show();
@@ -57,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void PlayAgain(View view){
-   Toast.makeText(getApplicationContext(),"good",Toast.LENGTH_LONG).show();
+        activeplayer =true;
+ //  Toast.makeText(getApplicationContext(),"good",Toast.LENGTH_LONG).show();
        playcounter = 0;
         // gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
          for (int i=0; i<gameState.length ;i++){
